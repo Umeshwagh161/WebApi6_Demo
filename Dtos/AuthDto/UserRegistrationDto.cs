@@ -12,4 +12,5 @@ namespace WebAPI6_Demo.Dtos.AuthDto
         public string Phone { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
     }
+  
 }

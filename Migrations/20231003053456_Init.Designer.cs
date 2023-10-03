@@ -12,7 +12,7 @@ using WebAPI6_Demo.Model;
 namespace WebAPI6_Demo.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230816112040_Init")]
+    [Migration("20231003053456_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,12 +87,12 @@ namespace WebAPI6_Demo.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Student"
+                            Name = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Admin"
+                            Name = "Teacher"
                         });
                 });
 
@@ -129,7 +129,7 @@ namespace WebAPI6_Demo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("studentName")
+                    b.Property<string>("StudentName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -203,15 +203,15 @@ namespace WebAPI6_Demo.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedDate = new DateTime(2023, 8, 16, 11, 20, 40, 428, DateTimeKind.Utc).AddTicks(2561),
-                            Email = "umesh@narola.email",
+                            CreatedDate = new DateTime(2023, 10, 3, 5, 34, 55, 690, DateTimeKind.Utc).AddTicks(7726),
+                            Email = "ugw@narola.email",
                             FirstName = "umesh",
                             ImgName = "",
                             ImgUrl = "",
                             IsActive = true,
                             IsDelete = false,
                             LastName = "Admin",
-                            PasswordHashed = "$2a$11$/uLyC3cquWrYq.0O7pBbU.SZ6wcu9CWk1lZGb4lcKirutrOT7s0XS",
+                            PasswordHashed = "$2a$11$LQtZW0Q8Ubodri.OZd6M3uz4fmxJYaxoAvnbVRy2a2MeVCj3kRE72",
                             Phone = "+46733284906",
                             RoleId = 2
                         });

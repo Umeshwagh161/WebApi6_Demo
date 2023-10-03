@@ -32,6 +32,10 @@ namespace WebAPI6_Demo.Controllers
             if (!response.Success) return BadRequest(response);
             return Ok(response);
         }
+
+        //Refresh token used after main token is expired.
+        //When main token expired and if you don't have refresh token then it will redirect you to login.
+
         [HttpPost("RefreshToken")]
         public async Task<ActionResult<AuthenticationResponse>> RefreshToken()
         {
@@ -48,6 +52,8 @@ namespace WebAPI6_Demo.Controllers
             return Ok(response);
         }
 
+        //This mathod accessible for Admin and Teacher only
+        [Authorize(Roles = "Admin,Teacher")]
         [HttpPost("Resetpassword")]
         public async Task<ActionResult<ServiceResponse<string>>> ResetPassword(ResetPasswordDto resetPasswordRequest)
         {
@@ -55,6 +61,5 @@ namespace WebAPI6_Demo.Controllers
             if (!response.Success) return BadRequest(response);
             return Ok(response);
         }
-
     }
 }

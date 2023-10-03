@@ -28,7 +28,7 @@ namespace WebAPI6_Demo.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    studentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StudentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Remark = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: true),
@@ -104,17 +104,17 @@ namespace WebAPI6_Demo.Migrations
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "Student" });
+                values: new object[] { 1, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 2, "Admin" });
+                values: new object[] { 2, "Teacher" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Email", "FirstName", "ImgName", "ImgUrl", "IsActive", "IsDelete", "LastName", "ModifiedBy", "ModifiedDate", "PasswordHashed", "Phone", "RoleId" },
-                values: new object[] { 1L, null, new DateTime(2023, 8, 16, 11, 20, 40, 428, DateTimeKind.Utc).AddTicks(2561), "umesh@narola.email", "umesh", "", "", true, false, "Admin", null, null, "$2a$11$/uLyC3cquWrYq.0O7pBbU.SZ6wcu9CWk1lZGb4lcKirutrOT7s0XS", "+46733284906", 2 });
+                values: new object[] { 1L, null, new DateTime(2023, 10, 3, 5, 34, 55, 690, DateTimeKind.Utc).AddTicks(7726), "ugw@narola.email", "umesh", "", "", true, false, "Admin", null, null, "$2a$11$LQtZW0Q8Ubodri.OZd6M3uz4fmxJYaxoAvnbVRy2a2MeVCj3kRE72", "+46733284906", 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_RefreshTokens_UserId",

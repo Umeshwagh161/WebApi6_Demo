@@ -4,7 +4,7 @@ namespace WebAPI6_Demo.Model
 {
     public class Student : EntityWithAudit
     {
-      public string studentName { get; set; } = string.Empty;
+      public string StudentName { get; set; } = string.Empty;
       public int Age { get; set; }
       public string Remark { get; set; } = string.Empty;
     }

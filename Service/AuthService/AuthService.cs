@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -40,9 +41,8 @@ namespace WebAPI6_Demo.Service.AuthService
                     LastName = registerRequest.LastName,
                     PasswordHashed = HashPassword(registerRequest.Password),
                     CreatedDate = DateTime.UtcNow,
-                    RoleId = 1
+                    RoleId = 2
                 };
-
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
 
@@ -127,15 +127,23 @@ namespace WebAPI6_Demo.Service.AuthService
         public async Task<ServiceResponse<string>> ResetPassword(ResetPasswordDto resetPasswordRequest)
         {
             var response = new ServiceResponse<string>();
+           
+
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == resetPasswordRequest.Email && u.IsActive && !u.IsDelete);
+
             if (user == null)
             {
                 response.Message = "User does not exist.";
                 response.Success = false;
             }
+            else if (!VerifyPassword(resetPasswordRequest.OldPassword, user.PasswordHashed))
+            {
+                response.Message = "Old password does not match.";
+                response.Success = false;
+            }
             else
             {
-                var newPassword = HashPassword(resetPasswordRequest.Password);
+                var newPassword = HashPassword(resetPasswordRequest.NewPassword);
                 user.PasswordHashed = newPassword;
                 await _context.SaveChangesAsync();
 
@@ -143,13 +151,11 @@ namespace WebAPI6_Demo.Service.AuthService
                 response.Message = "Password changed.";
                 response.Success = true;
             }
-
             return response;
         }
         public async Task<AuthenticationResponse> RefreshToken()
         {
             var response = new AuthenticationResponse();
-
             var refreshTokenInHttp = _httpContextAccessor?.HttpContext?.Request.Cookies["refreshToken"];
             var refreshTokenInDb = await _context.RefreshTokens.Include(u => u.User).ThenInclude(r => r.Role).FirstOrDefaultAsync(rt => rt.Token == refreshTokenInHttp);
             if (refreshTokenInDb == null)
@@ -186,10 +192,13 @@ namespace WebAPI6_Demo.Service.AuthService
 
             return response;
         }
+
+        //Convert you orginal password in BCrypt formate.
         private string HashPassword(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
+
         private bool VerifyPassword(string password, string hashedPassword)
         {
             return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
