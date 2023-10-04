@@ -11,6 +11,7 @@ namespace WebAPI6_Demo.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Define All role here.
             modelBuilder.Entity<Role>().HasData(
                 new Role { Id = 1, Name = "Admin" },
                 new Role { Id = 2, Name = "Teacher" }

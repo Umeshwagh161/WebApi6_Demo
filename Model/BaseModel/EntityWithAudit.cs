@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAPI6_Demo.Model.BaseModel
 {
+
+    //EntityWithAudit contain comman property that we have to use in every table so we declared it as base class.
     public class EntityWithAudit
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

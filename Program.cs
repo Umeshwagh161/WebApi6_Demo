@@ -33,6 +33,8 @@ builder.Services.AddSwaggerGen(c =>
 
 //AutoMapperAddAutoMapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+//Dependency Injection for service and interface
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 

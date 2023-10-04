@@ -21,6 +21,7 @@ namespace WebAPI6_Demo.Service.AuthService
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
         }
+
         public async Task<ServiceResponse<int>> Register(UserRegisterDto registerRequest)
         {
             var response = new ServiceResponse<int>();
@@ -41,7 +42,7 @@ namespace WebAPI6_Demo.Service.AuthService
                     LastName = registerRequest.LastName,
                     PasswordHashed = HashPassword(registerRequest.Password),
                     CreatedDate = DateTime.UtcNow,
-                    RoleId = 2
+                    RoleId = 2 //Teacher
                 };
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
